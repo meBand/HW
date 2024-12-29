@@ -197,4 +197,22 @@ public class MyArrayList<T> {
         }
         return null;
     }
+
+    /**
+     * Returns a sublist from the specified range.
+     * @param fromIndex the starting index (inclusive)
+     * @param toIndex the ending index (exclusive)
+     * @return a new MyArrayList containing the elements in the specified range
+     * @throws IndexOutOfBoundsException if the indices are out of range
+     */
+    public MyArrayList<T> subList(int fromIndex, int toIndex) {
+        if (fromIndex < 0 || toIndex > size || fromIndex > toIndex) {
+            throw new IndexOutOfBoundsException("fromIndex: " + fromIndex + ", toIndex: " + toIndex + ", Size: " + size);
+        }
+        MyArrayList<T> subList = new MyArrayList<>();
+        for (int i = fromIndex; i < toIndex; i++) {
+            subList.add((T) elements[i]);
+        }
+        return subList;
+    }
 }
