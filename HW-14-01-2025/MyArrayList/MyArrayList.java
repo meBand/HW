@@ -1,6 +1,6 @@
 /**
- *  MyArrayList is a simple implementation of a dynamic array.
- *  It allows for adding, removing, and accessing elements.
+ * MyArrayList is a simple implementation of a dynamic array.
+ * It allows for adding, removing, and accessing elements.
  * @Author meBanda
  */
 public class MyArrayList<T> {
@@ -89,10 +89,12 @@ public class MyArrayList<T> {
      * @param element the element to add
      */
     private void addLast(T element) {
-        int newCapacity = (int) (elements.length * 1.5);
-        T[] newArray = (T[]) new Object[newCapacity];
-        System.arraycopy(elements, 0, newArray, size, elements.length);
-        elements = newArray;
+        if (size >= elements.length) {
+            int newCapacity = (int) (elements.length * 1.5);
+            T[] newArray = (T[]) new Object[newCapacity];
+            System.arraycopy(elements, 0, newArray, size, elements.length);
+            elements = newArray;
+        }
         elements[size++] = element;
     }
 
@@ -104,7 +106,12 @@ public class MyArrayList<T> {
         if (size >= elements.length) {
             int newCapacity = (int) (elements.length * 1.5);
             T[] newArray = (T[]) new Object[newCapacity];
-            addLast(element);
+            newArray[size++] = element;
+            System.arraycopy(elements, 0, newArray, size, elements.length);
+            elements = newArray;
+        } else {
+            T[] newArray = (T[]) new Object[elements.length];
+            newArray[size++] = element;
             System.arraycopy(elements, 0, newArray, size, elements.length);
             elements = newArray;
         }
