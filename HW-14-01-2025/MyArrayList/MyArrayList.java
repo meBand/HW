@@ -147,4 +147,31 @@ public class MyArrayList<T> {
                 newArray, index + 1, elements.length);
         elements = newArray;
     }
+
+    /**
+     * Returns the element at the specified position in this list.
+     * @param index the index of the element to return
+     * @return the element at the specified position
+     * @throws IndexOutOfBoundsException if the index is out of range
+     */
+    public T get(int index) {
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
+        }
+        return (T) elements[index];
+    }
+
+    /**
+     * Replaces the element at the specified position in this list with the specified element.
+     * @param index the index of the element to replace
+     * @param element the element to be stored at the specified position
+     * @return the element previously at the specified position
+     * @throws IndexOutOfBoundsException if the index is out of range
+     */
+    public void set(int index, T element) {
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
+        }
+        elements[index] = element;
+    }
 }
