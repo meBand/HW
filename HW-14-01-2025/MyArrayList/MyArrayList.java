@@ -1,3 +1,5 @@
+import java.util.Iterator;
+
 /**
  * MyArrayList is a simple implementation of a dynamic array.
  * It allows for adding, removing, and accessing elements.
@@ -88,7 +90,7 @@ public class MyArrayList<T> {
         if (size >= elements.length) {
             int newCapacity = (int) (elements.length * 1.5);
             T[] newArray = createArray(newCapacity);
-            System.arraycopy(elements, 0, newArray, size, elements.length);
+            System.arraycopy(elements, 0, newArray, 0, elements.length);
             elements = newArray;
         }
         elements[size++] = element;
@@ -102,14 +104,16 @@ public class MyArrayList<T> {
         if (size >= elements.length) {
             int newCapacity = (int) (elements.length * 1.5);
             T[] newArray = createArray(newCapacity);
-            newArray[size++] = element;
-            System.arraycopy(elements, 0, newArray, size, elements.length);
+            newArray[0] = element;
+            System.arraycopy(elements, 0, newArray, 1, elements.length);
             elements = newArray;
+            size++;
         } else {
-            T[] newArray = createArray(elements.length);
-            newArray[size++] = element;
-            System.arraycopy(elements, 0, newArray, size, elements.length);
+            T[] newArray = createArray(elements.length+1);
+            newArray[0] = element;
+            System.arraycopy(elements, 0, newArray, 1, elements.length);
             elements = newArray;
+            size++;
         }
     }
     //todo addFirst addLast - вынести метод
@@ -129,7 +133,7 @@ public class MyArrayList<T> {
                 int newCapacity = (int) (elements.length * 1.5);
                 addInside(index, element, newCapacity);
             } else {
-                addInside(index, element, elements.length);
+                addInside(index, element, elements.length+1);
             }
         }
     }
@@ -141,11 +145,12 @@ public class MyArrayList<T> {
      */
     private void addInside(int index, T element, int capacity) {
         T[] newArray = createArray(capacity);
-        System.arraycopy(elements, 0, newArray, size, elements.length - index);
-        newArray[size++] = element;
-        System.arraycopy(elements, elements.length - index + 1,
-                newArray, index + 1, elements.length);
+        System.arraycopy(elements, 0, newArray, 0, index);
+        newArray[index] = element;
+        System.arraycopy(elements, index,
+                newArray, index + 1, elements.length - index);
         elements = newArray;
+        size++;
     }
 
     /**
@@ -165,7 +170,6 @@ public class MyArrayList<T> {
      * Replaces the element at the specified position in this list with the specified element.
      * @param index the index of the element to replace
      * @param element the element to be stored at the specified position
-     * @return the element previously at the specified position
      * @throws IndexOutOfBoundsException if the index is out of range
      */
     public void set(int index, T element) {
