@@ -74,12 +74,8 @@ public class MyArrayList<T> {
      * @param element the element to add
      */
     public void add(int index, T element) {
-        if ( index < 0 || index > size ) {
-            throw new IndexOutOfBoundsException();
-        } else {
-            addByIndex(index, element);
-        }
-
+        checkIndexOutOfBoundsException(index);
+        addByIndex(index, element);
     }
 
     /**
@@ -107,16 +103,15 @@ public class MyArrayList<T> {
             newArray[0] = element;
             System.arraycopy(elements, 0, newArray, 1, elements.length);
             elements = newArray;
-            size++;
         } else {
             T[] newArray = createArray(elements.length+1);
             newArray[0] = element;
             System.arraycopy(elements, 0, newArray, 1, elements.length);
             elements = newArray;
-            size++;
         }
+        size++;
     }
-    //todo addFirst addLast - вынести метод
+    //todo addFirst addLast - вынести общий метод
 
     /**
      * Adds an element to the list by index.
@@ -160,9 +155,7 @@ public class MyArrayList<T> {
      * @throws IndexOutOfBoundsException if the index is out of range
      */
     public T get(int index) {
-        if (index < 0 || index >= size) {
-            throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
-        }
+        checkIndexOutOfBoundsException(index);
         return (T) elements[index];
     }
 
@@ -173,9 +166,35 @@ public class MyArrayList<T> {
      * @throws IndexOutOfBoundsException if the index is out of range
      */
     public void set(int index, T element) {
+        checkIndexOutOfBoundsException(index);
+        elements[index] = element;
+    }
+
+    /**
+     * Removes the element at the specified position in this list.
+     * @param index the index of the element to remove
+     * @return the element that was removed
+     * @throws IndexOutOfBoundsException if the index is out of range
+     */
+    public T remove(int index) {
+        checkIndexOutOfBoundsException(index);
+        T removedElement = (T) elements[index];
+        for (int i = index; i < size - 1; i++) {
+            elements[i] = elements[i + 1];
+        }
+        elements[--size] = null;
+        return removedElement;
+    }
+
+    /**
+     * Check index for IndexOutOfBoundsException
+     * @param index
+     * @return {@link IndexOutOfBoundsException}
+     */
+    private Throwable checkIndexOutOfBoundsException(int index) {
         if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
         }
-        elements[index] = element;
+        return null;
     }
 }
