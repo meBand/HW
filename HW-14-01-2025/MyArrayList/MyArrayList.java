@@ -1,5 +1,3 @@
-import java.util.Iterator;
-
 /**
  * MyArrayList is a simple implementation of a dynamic array.
  * It allows for adding, removing, and accessing elements.
@@ -215,4 +213,6 @@ public class MyArrayList<T> {
         }
         return subList;
     }
+
+    //todo по возможности докинуть addAll, removeAll
 }
