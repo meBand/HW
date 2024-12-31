@@ -94,7 +94,7 @@ public class MyLinkedList<T> {
      */
     private void addInside(int index, T data) {
         Node<T> newNode = new Node<>(data);
-        Node indexNode = getNode(index);
+        Node<T> indexNode = getNode(index);
         newNode.next = indexNode;
         newNode.prev = indexNode.prev;
         indexNode.prev.next = newNode;
@@ -130,5 +130,37 @@ public class MyLinkedList<T> {
             current = current.next;
         }
         return current;
+    }
+
+    /**
+     *
+     */
+    public T remove(int index) {
+        Node<T> rmNode = getNode(index);
+        rmNode.next.prev = rmNode.prev;
+        rmNode.prev.next = rmNode.next;
+        return rmNode.data;
+    }
+
+    /**
+     *
+     */
+    public MyLinkedList<T> subList(int startIndex, int endIndex) {
+        if ( !checkSpan(startIndex, endIndex) ) {
+            throw new IndexOutOfBoundsException("Interval is not valid: ( startIndex = " + startIndex +
+                    " endIndex = " + endIndex);
+        }
+        MyLinkedList<T> subList = new MyLinkedList<>();
+        for (int i = startIndex; i < endIndex; i++) {
+            subList.add( this.get(i) );
+        }
+        return subList;
+    }
+
+    /**
+     *
+     */
+    private boolean checkSpan(int startIndex, int endIndex) {
+        return startIndex >= 0 && startIndex < size && endIndex >= startIndex;
     }
 }
