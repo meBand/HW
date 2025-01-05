@@ -21,6 +21,15 @@ public class MyLinkedList<T> {
     private int size;
 
     /**
+     *
+     */
+    public MyLinkedList() {
+        head = null;
+        tail = null;
+        size = 0;
+    }
+
+    /**
      * Class
      */
     private static class Node<T> {
