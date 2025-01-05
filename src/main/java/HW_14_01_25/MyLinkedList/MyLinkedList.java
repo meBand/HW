@@ -13,9 +13,25 @@ public class MyLinkedList<T> {
     private Node<T> head;
 
     /**
+     * returns first element of a {@link MyLinkedList}
+     * @return {@link Node}
+     */
+    public Node<T> getHead() {
+        return head;
+    }
+
+    /**
      * last element of a {@link MyLinkedList}
      */
     private Node<T> tail;
+
+    /**
+     * returns last element of a {@link MyLinkedList}
+     * @return {@link Node}
+     */
+    public Node<T> getTail() {
+        return tail;
+    }
 
     /**
      * {@link MyLinkedList} size
