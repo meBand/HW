@@ -1,3 +1,5 @@
+package HW14012025.MyLinkedList;
+
 /**
  * MyLinkedList is a simple implementation of linked list.
  * It allows for adding, removing, and accessing elements.
