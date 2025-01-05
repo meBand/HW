@@ -137,8 +137,17 @@ public class MyLinkedList<T> {
      */
     public T remove(int index) {
         Node<T> rmNode = getNode(index);
-        rmNode.next.prev = rmNode.prev;
-        rmNode.prev.next = rmNode.next;
+        if (rmNode == head) {
+            head = rmNode.next;
+            head.prev = null;
+        } else if (rmNode == tail) {
+            tail = rmNode.prev;
+            tail.next = null;
+        } else {
+            rmNode.next.prev = rmNode.prev;
+            rmNode.prev.next = rmNode.next;
+        }
+        size--;
         return rmNode.data;
     }
 
@@ -163,4 +172,6 @@ public class MyLinkedList<T> {
     private boolean checkSpan(int startIndex, int endIndex) {
         return startIndex >= 0 && startIndex < size && endIndex >= startIndex;
     }
+
+    //todo javaDoc, по возможности addAll, removeAll
 }
