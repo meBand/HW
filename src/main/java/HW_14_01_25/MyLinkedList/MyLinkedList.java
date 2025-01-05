@@ -1,4 +1,4 @@
-package HW14012025.MyLinkedList;
+package HW_14_01_25.MyLinkedList;
 
 /**
  * MyLinkedList is a simple implementation of linked list.

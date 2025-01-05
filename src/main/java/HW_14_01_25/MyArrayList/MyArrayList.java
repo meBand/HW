@@ -1,4 +1,4 @@
-package HW14012025.MyArrayList;
+package HW_14_01_25.MyArrayList;
 /**
  * MyArrayList is a simple implementation of a dynamic array.
  * It allows for adding, removing, and accessing elements.
