@@ -6,29 +6,30 @@
 public class MyLinkedList<T> {
 
     /**
-     *
+     * first element of a {@link MyLinkedList}
      */
     private Node<T> head;
 
     /**
-     *
+     * last element of a {@link MyLinkedList}
      */
     private Node<T> tail;
 
     /**
-     *
+     * {@link MyLinkedList} size
      */
     private int size;
 
     /**
-     *
+     * returns the size of the {@link MyLinkedList}
+     * @return {@link #size}
      */
     public int size() {
         return size;
     }
 
     /**
-     *
+     * default constructor of the {@link MyLinkedList}
      */
     public MyLinkedList() {
         head = null;
@@ -37,13 +38,28 @@ public class MyLinkedList<T> {
     }
 
     /**
-     * Class
+     * Element (node) of a {@link MyLinkedList}
      */
     private static class Node<T> {
+        /**
+         * data of the {@link Node}
+         */
         T data;
+
+        /**
+         * link to the next element of the linked list {@link MyLinkedList}
+         */
         Node<T> next;
+
+        /**
+         * link to the previous element of the linked list {@link MyLinkedList}
+         */
         Node<T> prev;
 
+        /**
+         * default constructor of the {@link Node}
+         * @param data {@link #data}
+         */
         Node(T data) {
             this.data = data;
             this.next = null;
@@ -52,14 +68,17 @@ public class MyLinkedList<T> {
     }
 
     /**
-     *
+     * adds new {@link Node} to the end of a {@link MyLinkedList}
+     * @param data {@link Node#data}
      */
     public void add(T data) {
         addLast(data);
     }
 
     /**
-     *
+     * adds new {@link Node} to the {@link MyLinkedList} by index
+     * @param index index of a {@link Node} in a {@link MyLinkedList}
+     * @param data {@link Node#data}
      */
     public void add(int index, T data) {
         if (index == size) {
@@ -75,7 +94,8 @@ public class MyLinkedList<T> {
     }
 
     /**
-     *
+     * adds new {@link Node} to the end of a {@link MyLinkedList}
+     * @param data {@link Node#data}
      */
     private void addLast(T data) {
         Node<T> newNode = new Node<>(data);
@@ -90,7 +110,8 @@ public class MyLinkedList<T> {
     }
 
     /**
-     *
+     * adds new {@link Node} to the beginning of a {@link MyLinkedList}
+     * @param data {@link Node#data}
      */
     private void addFirst(T data) {
         Node<T> newNode = new Node<>(data);
@@ -106,7 +127,9 @@ public class MyLinkedList<T> {
     }
 
     /**
-     *
+     * adds new {@link Node} into the {@link MyLinkedList}
+     * @param index index of a {@link Node} in a {@link MyLinkedList}
+     * @param data {@link Node#data}
      */
     private void addInside(int index, T data) {
         Node<T> newNode = new Node<>(data);
@@ -118,14 +141,21 @@ public class MyLinkedList<T> {
     }
 
     /**
-     *
+     * returns the data of a {@link Node} in a {@link MyLinkedList} by index
+     * @param index index of a {@link Node} in a {@link MyLinkedList}
+     * @return {@link Node#data}
      */
     public T get(int index) {
         return getNode(index).data;
     }
 
     /**
-     *
+     * sets new data for a {@link Node} in a {@link MyLinkedList} by index
+     * <p>
+     * returns old data of a {@link Node}
+     * @param index index of a {@link Node} in a {@link MyLinkedList}
+     * @param data {@link Node#data}
+     * @return {@link Node#data} before setting new data
      */
     public T set(int index, T data) {
         Node<T> current = getNode(index);
@@ -135,7 +165,9 @@ public class MyLinkedList<T> {
     }
 
     /**
-     *
+     * returns a {@link Node} in a {@link MyLinkedList} by index
+     * @param index index of a {@link Node} in a {@link MyLinkedList}
+     * @return {@link Node}
      */
     private Node<T> getNode(int index) {
         if (index < 0 || index >= size) {
@@ -149,7 +181,11 @@ public class MyLinkedList<T> {
     }
 
     /**
-     *
+     * removes a {@link Node} from a {@link MyLinkedList} by index
+     * <p>
+     * return data of a removed node
+     * @param index index of a {@link Node} in a {@link MyLinkedList}
+     * @return {@link Node#data} of a removed {@link Node}
      */
     public T remove(int index) {
         Node<T> rmNode = getNode(index);
@@ -168,10 +204,13 @@ public class MyLinkedList<T> {
     }
 
     /**
-     *
+     * returns sublist based on an existing one within a given range
+     * @param startIndex start index of range (inclusive)
+     * @param endIndex end index of range (exclusive)
+     * @return {@link MyLinkedList}
      */
     public MyLinkedList<T> subList(int startIndex, int endIndex) {
-        if ( !checkSpan(startIndex, endIndex) ) {
+        if ( !checkRange(startIndex, endIndex) ) {
             throw new IndexOutOfBoundsException("Interval is not valid: ( startIndex = " + startIndex +
                     " endIndex = " + endIndex);
         }
@@ -183,11 +222,14 @@ public class MyLinkedList<T> {
     }
 
     /**
-     *
+     * checks the validity of a range for a current {@link MyLinkedList}
+     * @param startIndex start index of range (inclusive)
+     * @param endIndex end index of range (exclusive)
+     * @return true if range is valid
      */
-    private boolean checkSpan(int startIndex, int endIndex) {
+    private boolean checkRange(int startIndex, int endIndex) {
         return startIndex >= 0 && startIndex < size && endIndex >= startIndex;
     }
 
-    //todo javaDoc, по возможности addAll, removeAll
+    //todo javaDoc, по возможности докинуть addAll, removeAll
 }
