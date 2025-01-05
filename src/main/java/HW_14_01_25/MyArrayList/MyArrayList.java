@@ -43,7 +43,7 @@ public class MyArrayList<T> {
      * <p>
      * when capacity = 0 - constructor use {@link #DEFAULT_CAPACITY}
      * @param capacity initial capacity (only positive)
-     * @throws IllegalArgumentException when capacity < 0
+     * @throws IllegalArgumentException when capacity less than 0
      */
     public MyArrayList(int capacity) {
         if ( capacity > 0 ) {
