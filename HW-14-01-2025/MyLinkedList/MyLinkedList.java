@@ -79,6 +79,7 @@ public class MyLinkedList<T> {
      * adds new {@link Node} to the {@link MyLinkedList} by index
      * @param index index of a {@link Node} in a {@link MyLinkedList}
      * @param data {@link Node#data}
+     * @throws IndexOutOfBoundsException when index out of range
      */
     public void add(int index, T data) {
         if (index == size) {
@@ -168,6 +169,7 @@ public class MyLinkedList<T> {
      * returns a {@link Node} in a {@link MyLinkedList} by index
      * @param index index of a {@link Node} in a {@link MyLinkedList}
      * @return {@link Node}
+     * @throws IndexOutOfBoundsException when index out of range
      */
     private Node<T> getNode(int index) {
         if (index < 0 || index >= size) {
@@ -208,10 +210,11 @@ public class MyLinkedList<T> {
      * @param startIndex start index of range (inclusive)
      * @param endIndex end index of range (exclusive)
      * @return {@link MyLinkedList}
+     * @throws IndexOutOfBoundsException when range is not valid
      */
     public MyLinkedList<T> subList(int startIndex, int endIndex) {
         if ( !checkRange(startIndex, endIndex) ) {
-            throw new IndexOutOfBoundsException("Interval is not valid: ( startIndex = " + startIndex +
+            throw new IndexOutOfBoundsException("Range is not valid: ( startIndex = " + startIndex +
                     " endIndex = " + endIndex);
         }
         MyLinkedList<T> subList = new MyLinkedList<>();
