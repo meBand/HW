@@ -1,7 +1,9 @@
 package HW_14_01_25.MyArrayList;
+
 /**
  * MyArrayList is a simple implementation of a dynamic array.
  * It allows for adding, removing, and accessing elements.
+ *
  * @Author meBanda
  */
 public class MyArrayList<T> {
@@ -23,6 +25,7 @@ public class MyArrayList<T> {
 
     /**
      * create new array T[]
+     *
      * @param capacity initial capacity (should be more than 0)
      * @return new array T[]
      */
@@ -42,13 +45,14 @@ public class MyArrayList<T> {
      * constructor with parameterized initial capacity
      * <p>
      * when capacity = 0 - constructor use {@link #DEFAULT_CAPACITY}
+     *
      * @param capacity initial capacity (only positive)
      * @throws IllegalArgumentException when capacity less than 0
      */
     public MyArrayList(int capacity) {
-        if ( capacity > 0 ) {
+        if (capacity > 0) {
             elements = createArray(capacity);
-        } else if ( capacity == 0 ) {
+        } else if (capacity == 0) {
             elements = createArray(DEFAULT_CAPACITY);
         } else {
             throw new IllegalArgumentException("Capacity cannot be less than 1");
@@ -57,6 +61,7 @@ public class MyArrayList<T> {
 
     /**
      * returns the size of the {@link MyArrayList}.
+     *
      * @return {@link #size}
      */
     public int size() {
@@ -65,6 +70,7 @@ public class MyArrayList<T> {
 
     /**
      * adds an element to the end of a {@link MyArrayList}.
+     *
      * @param element the element to add
      */
     public void add(T element) {
@@ -73,7 +79,8 @@ public class MyArrayList<T> {
 
     /**
      * adds an element into the {@link MyArrayList} by index.
-     * @param index  index of a element in a {@link MyArrayList}
+     *
+     * @param index   index of an element in a {@link MyArrayList}
      * @param element the element to add
      * @throws IndexOutOfBoundsException when index out if bounds
      */
@@ -84,6 +91,7 @@ public class MyArrayList<T> {
 
     /**
      * adds an element to the end of the {@link MyArrayList}.
+     *
      * @param element the element to add
      */
     private void addLast(T element) {
@@ -98,6 +106,7 @@ public class MyArrayList<T> {
 
     /**
      * adds an element to the beginning of the {@link MyArrayList}.
+     *
      * @param element the element to add
      */
     private void addFirst(T element) {
@@ -108,7 +117,7 @@ public class MyArrayList<T> {
             System.arraycopy(elements, 0, newArray, 1, elements.length);
             elements = newArray;
         } else {
-            T[] newArray = createArray(elements.length+1);
+            T[] newArray = createArray(elements.length + 1);
             newArray[0] = element;
             System.arraycopy(elements, 0, newArray, 1, elements.length);
             elements = newArray;
@@ -119,27 +128,29 @@ public class MyArrayList<T> {
 
     /**
      * adds an element into the {@link MyArrayList} by index.
-     * @param index index of an element in a {@link MyArrayList}
+     *
+     * @param index   index of an element in a {@link MyArrayList}
      * @param element the element to add
      */
     private void addByIndex(int index, T element) {
-        if ( index == size ) {
+        if (index == size) {
             addLast(element);
-        } else if ( index == 0 ) {
+        } else if (index == 0) {
             addFirst(element);
         } else {
-            if ( size >= elements.length ) {
+            if (size >= elements.length) {
                 int newCapacity = (int) (elements.length * 1.5);
                 addInside(index, element, newCapacity);
             } else {
-                addInside(index, element, elements.length+1);
+                addInside(index, element, elements.length + 1);
             }
         }
     }
 
     /**
      * adds an element into the {@link MyArrayList} by index.
-     * @param index index of an element in a {@link MyArrayList}
+     *
+     * @param index   index of an element in a {@link MyArrayList}
      * @param element the element to add
      */
     private void addInside(int index, T element, int capacity) {
@@ -154,6 +165,7 @@ public class MyArrayList<T> {
 
     /**
      * returns the element at the specified position in this list.
+     *
      * @param index the index of the element to return
      * @return the element at the specified position
      * @throws IndexOutOfBoundsException if the index is out of range
@@ -165,7 +177,8 @@ public class MyArrayList<T> {
 
     /**
      * replaces the element at the specified position in the current {@link MyArrayList} with the specified element.
-     * @param index the index of the element to replace
+     *
+     * @param index   the index of the element to replace
      * @param element the element to be stored at the specified position
      * @throws IndexOutOfBoundsException if the index is out of range
      */
@@ -176,6 +189,7 @@ public class MyArrayList<T> {
 
     /**
      * removes the element at the specified position in this list.
+     *
      * @param index the index of the element to remove
      * @return the element that was removed
      * @throws IndexOutOfBoundsException if the index is out of range
@@ -192,6 +206,7 @@ public class MyArrayList<T> {
 
     /**
      * check index for IndexOutOfBoundsException
+     *
      * @param index
      * @return {@link IndexOutOfBoundsException}
      */
@@ -204,8 +219,9 @@ public class MyArrayList<T> {
 
     /**
      * returns a sublist from the specified range.
+     *
      * @param fromIndex the starting index (inclusive)
-     * @param toIndex the ending index (exclusive)
+     * @param toIndex   the ending index (exclusive)
      * @return a new MyArrayList containing the elements in the specified range
      * @throws IndexOutOfBoundsException if the indices are out of range
      */

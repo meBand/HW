@@ -5,6 +5,7 @@ import java.lang.reflect.Array;
 /**
  * MyLinkedList is a simple implementation of linked list.
  * It allows for adding, removing, and accessing elements.
+ *
  * @Author meBanda
  */
 public class MyLinkedList<T> {
@@ -16,6 +17,7 @@ public class MyLinkedList<T> {
 
     /**
      * returns first element of a {@link MyLinkedList}
+     *
      * @return {@link Node}
      */
     public Node<T> head() {
@@ -29,6 +31,7 @@ public class MyLinkedList<T> {
 
     /**
      * returns last element of a {@link MyLinkedList}
+     *
      * @return {@link Node}
      */
     public Node<T> tail() {
@@ -42,6 +45,7 @@ public class MyLinkedList<T> {
 
     /**
      * returns the size of the {@link MyLinkedList}
+     *
      * @return {@link #size}
      */
     public int size() {
@@ -78,6 +82,7 @@ public class MyLinkedList<T> {
 
         /**
          * default constructor of the {@link Node}
+         *
          * @param data {@link #data}
          */
         Node(T data) {
@@ -89,6 +94,7 @@ public class MyLinkedList<T> {
 
     /**
      * adds new {@link Node} to the end of a {@link MyLinkedList}
+     *
      * @param data {@link Node#data}
      */
     public void add(T data) {
@@ -97,18 +103,20 @@ public class MyLinkedList<T> {
 
     /**
      * adds array of new {@link Node} to the end of a {@link MyLinkedList}
+     *
      * @param data array of {@link Node#data}
      */
     public void add(T[] data) {
-        for ( T e : data ) {
+        for (T e : data) {
             addLast(e);
         }
     }
 
     /**
      * adds new {@link Node} to the {@link MyLinkedList} by index
+     *
      * @param index index of a {@link Node} in a {@link MyLinkedList}
-     * @param data {@link Node#data}
+     * @param data  {@link Node#data}
      * @throws IndexOutOfBoundsException when index out of range
      */
     public void add(int index, T data) {
@@ -126,6 +134,7 @@ public class MyLinkedList<T> {
 
     /**
      * adds new {@link Node} to the end of a {@link MyLinkedList}
+     *
      * @param data {@link Node#data}
      */
     private void addLast(T data) {
@@ -142,6 +151,7 @@ public class MyLinkedList<T> {
 
     /**
      * adds new {@link Node} to the beginning of a {@link MyLinkedList}
+     *
      * @param data {@link Node#data}
      */
     private void addFirst(T data) {
@@ -159,8 +169,9 @@ public class MyLinkedList<T> {
 
     /**
      * adds new {@link Node} into the {@link MyLinkedList}
+     *
      * @param index index of a {@link Node} in a {@link MyLinkedList}
-     * @param data {@link Node#data}
+     * @param data  {@link Node#data}
      */
     private void addInside(int index, T data) {
         Node<T> newNode = new Node<>(data);
@@ -173,6 +184,7 @@ public class MyLinkedList<T> {
 
     /**
      * returns the data of a {@link Node} in a {@link MyLinkedList} by index
+     *
      * @param index index of a {@link Node} in a {@link MyLinkedList}
      * @return {@link Node#data}
      */
@@ -182,39 +194,41 @@ public class MyLinkedList<T> {
 
     /**
      * returns the data of a {@link Node} in a {@link MyLinkedList}
+     *
      * @param node {@link Node}
      * @return {@link Node#data}
      */
-    public T get(Node<T> node) { return node.data; }
+    public T get(Node<T> node) {
+        return node.data;
+    }
 
     /**
      * returns the next node data of a {@link Node} in a {@link MyLinkedList}
+     *
      * @param node {@link Node}
      * @return {@link Node#data}
      */
-    public T getNext(Node<T> node) { return node.next.data; }
+    public T getNext(Node<T> node) {
+        return node.next.data;
+    }
 
     /**
      * returns the prev node data of a {@link Node} in a {@link MyLinkedList}
+     *
      * @param node {@link Node}
      * @return {@link Node#data}
      */
-    public T getPrev(Node<T> node) { return node.prev.data; }
-
-//    public T[] getAll() {
-//        T[] resultArray = (T[]) Array.newInstance(T, size);
-//        for (int i = 0; i < size; i++) {
-//            resultArray[i] = get(i);
-//        }
-//        return resultArray;
-//    }
+    public T getPrev(Node<T> node) {
+        return node.prev.data;
+    }
 
     /**
      * sets new data for a {@link Node} in a {@link MyLinkedList} by index
      * <p>
      * returns old data of a {@link Node}
+     *
      * @param index index of a {@link Node} in a {@link MyLinkedList}
-     * @param data {@link Node#data}
+     * @param data  {@link Node#data}
      * @return {@link Node#data} before setting new data
      */
     public T set(int index, T data) {
@@ -226,6 +240,7 @@ public class MyLinkedList<T> {
 
     /**
      * returns a {@link Node} in a {@link MyLinkedList} by index
+     *
      * @param index index of a {@link Node} in a {@link MyLinkedList}
      * @return {@link Node}
      * @throws IndexOutOfBoundsException when index out of range
@@ -245,6 +260,7 @@ public class MyLinkedList<T> {
      * removes a {@link Node} from a {@link MyLinkedList} by index
      * <p>
      * return data of a removed node
+     *
      * @param index index of a {@link Node} in a {@link MyLinkedList}
      * @return {@link Node#data} of a removed {@link Node}
      */
@@ -266,27 +282,29 @@ public class MyLinkedList<T> {
 
     /**
      * returns sublist based on an existing one within a given range
+     *
      * @param startIndex start index of range (inclusive)
-     * @param endIndex end index of range (exclusive)
+     * @param endIndex   end index of range (exclusive)
      * @return {@link MyLinkedList}
      * @throws IndexOutOfBoundsException when range is not valid
      */
     public MyLinkedList<T> subList(int startIndex, int endIndex) {
-        if ( !checkRange(startIndex, endIndex) ) {
+        if (!checkRange(startIndex, endIndex)) {
             throw new IndexOutOfBoundsException("Range is not valid: ( startIndex = " + startIndex +
                     " endIndex = " + endIndex);
         }
         MyLinkedList<T> subList = new MyLinkedList<>();
         for (int i = startIndex; i < endIndex; i++) {
-            subList.add( this.get(i) );
+            subList.add(this.get(i));
         }
         return subList;
     }
 
     /**
      * checks the validity of a range for a current {@link MyLinkedList}
+     *
      * @param startIndex start index of range (inclusive)
-     * @param endIndex end index of range (exclusive)
+     * @param endIndex   end index of range (exclusive)
      * @return true if range is valid
      */
     private boolean checkRange(int startIndex, int endIndex) {
