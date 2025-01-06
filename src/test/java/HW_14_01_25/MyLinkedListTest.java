@@ -2,15 +2,24 @@ package HW_14_01_25;
 
 import HW_14_01_25.MyLinkedList.MyLinkedList;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 class MyLinkedListTest {
 
     private MyLinkedList<Integer> list;
+
+    @BeforeAll
+    static void beforeAll() {
+        System.out.println("Before all...\n");
+    }
+
+    @AfterAll
+    static void afterAll() {
+        System.out.println("After all...");
+    }
 
     @BeforeEach
     void before() {
@@ -21,25 +30,25 @@ class MyLinkedListTest {
     @AfterEach
     void after() {
         System.out.println("After each..." + this);
+        System.out.println();
     }
 
     @Test
     void listEmptyIfNoElementsAdd() {
         System.out.println("running listEmptyIfNoElementsAdd for " + this);
         assertAll(
-                () -> assertNull(list.getHead(), "Head of the list should be null"),
-                () -> assertNull(list.getTail(), "Tail of the list should be null"),
-                () -> assertEquals(0, list.size(), "Size of the list should be 0")
+                () -> assertThat(list.getHead()).isNull(),
+                () -> assertThat(list.getTail()).isNull(),
+                () -> assertThat(list.size()).isEqualTo(0)
         );
     }
 
     @Test
     void listSizeIfElementAdded() {
         System.out.println("running listSizeIfElementAdded for " + this);
-        for (int i = 1; i < 4; i++) {
+        for (int i = 1; i <= 10; i++) {
             list.add(i);
         }
-
-        assertEquals(3, list.size(), "Size of the list should be 3");
+        assertThat(list.size()).isEqualTo(10);
     }
 }
