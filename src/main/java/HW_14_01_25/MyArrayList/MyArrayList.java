@@ -220,5 +220,5 @@ public class MyArrayList<T> {
         return subList;
     }
 
-    //todo по возможности докинуть addAll, removeAll
+    //todo по возможности докинуть addAll, getAll, removeAll
 }

@@ -1,5 +1,7 @@
 package HW_14_01_25.MyLinkedList;
 
+import java.lang.reflect.Array;
+
 /**
  * MyLinkedList is a simple implementation of linked list.
  * It allows for adding, removing, and accessing elements.
@@ -16,7 +18,7 @@ public class MyLinkedList<T> {
      * returns first element of a {@link MyLinkedList}
      * @return {@link Node}
      */
-    public Node<T> getHead() {
+    public Node<T> head() {
         return head;
     }
 
@@ -29,7 +31,7 @@ public class MyLinkedList<T> {
      * returns last element of a {@link MyLinkedList}
      * @return {@link Node}
      */
-    public Node<T> getTail() {
+    public Node<T> tail() {
         return tail;
     }
 
@@ -91,6 +93,16 @@ public class MyLinkedList<T> {
      */
     public void add(T data) {
         addLast(data);
+    }
+
+    /**
+     * adds array of new {@link Node} to the end of a {@link MyLinkedList}
+     * @param data array of {@link Node#data}
+     */
+    public void add(T[] data) {
+        for ( T e : data ) {
+            addLast(e);
+        }
     }
 
     /**
@@ -169,6 +181,35 @@ public class MyLinkedList<T> {
     }
 
     /**
+     * returns the data of a {@link Node} in a {@link MyLinkedList}
+     * @param node {@link Node}
+     * @return {@link Node#data}
+     */
+    public T get(Node<T> node) { return node.data; }
+
+    /**
+     * returns the next node data of a {@link Node} in a {@link MyLinkedList}
+     * @param node {@link Node}
+     * @return {@link Node#data}
+     */
+    public T getNext(Node<T> node) { return node.next.data; }
+
+    /**
+     * returns the prev node data of a {@link Node} in a {@link MyLinkedList}
+     * @param node {@link Node}
+     * @return {@link Node#data}
+     */
+    public T getPrev(Node<T> node) { return node.prev.data; }
+
+//    public T[] getAll() {
+//        T[] resultArray = (T[]) Array.newInstance(T, size);
+//        for (int i = 0; i < size; i++) {
+//            resultArray[i] = get(i);
+//        }
+//        return resultArray;
+//    }
+
+    /**
      * sets new data for a {@link Node} in a {@link MyLinkedList} by index
      * <p>
      * returns old data of a {@link Node}
@@ -189,7 +230,7 @@ public class MyLinkedList<T> {
      * @return {@link Node}
      * @throws IndexOutOfBoundsException when index out of range
      */
-    private Node<T> getNode(int index) {
+    public Node<T> getNode(int index) {
         if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException("Index out of range: " + index);
         }
@@ -252,5 +293,5 @@ public class MyLinkedList<T> {
         return startIndex >= 0 && startIndex < size && endIndex >= startIndex;
     }
 
-    //todo javaDoc, по возможности докинуть addAll, removeAll
+    //todo javaDoc, по возможности докинуть addAll, getAll, removeAll
 }
