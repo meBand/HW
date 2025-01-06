@@ -9,7 +9,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class MyLinkedListTest {
 
-    private MyLinkedList<Integer> list;
+    private MyLinkedList<Integer> integerMyLinkedList;
+    private MyLinkedList<String> stringMyLinkedList;
 
     @BeforeAll
     static void beforeAll() {
@@ -24,7 +25,8 @@ class MyLinkedListTest {
     @BeforeEach
     void before() {
         System.out.println("Before each..." + this);
-        list = new MyLinkedList<>();
+        integerMyLinkedList = new MyLinkedList<>();
+        stringMyLinkedList = new MyLinkedList<>();
     }
 
     @AfterEach
@@ -37,9 +39,9 @@ class MyLinkedListTest {
     void listEmptyIfNoElementsAdd() {
         System.out.println("running listEmptyIfNoElementsAdd for " + this);
         assertAll(
-                () -> assertThat(list.getHead()).isNull(),
-                () -> assertThat(list.getTail()).isNull(),
-                () -> assertThat(list.size()).isEqualTo(0)
+                () -> assertThat(integerMyLinkedList.head()).isNull(),
+                () -> assertThat(integerMyLinkedList.tail()).isNull(),
+                () -> assertThat(integerMyLinkedList.size()).isEqualTo(0)
         );
     }
 
@@ -47,8 +49,11 @@ class MyLinkedListTest {
     void listSizeIfElementAdded() {
         System.out.println("running listSizeIfElementAdded for " + this);
         for (int i = 1; i <= 10; i++) {
-            list.add(i);
+            integerMyLinkedList.add(i);
         }
-        assertThat(list.size()).isEqualTo(10);
+        assertThat(integerMyLinkedList.size()).isEqualTo(10);
     }
+
+    //todo составить список тестов и реализовать
+    //todo рефакторинг неймов переменных
 }
