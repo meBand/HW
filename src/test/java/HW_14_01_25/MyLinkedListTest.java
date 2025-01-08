@@ -2,58 +2,40 @@ package HW_14_01_25;
 
 import HW_14_01_25.MyLinkedList.MyLinkedList;
 
+import HW_14_01_25.paramResolver.ListParamResolver;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@ExtendWith({
+        ListParamResolver.class
+})
 class MyLinkedListTest {
 
-    private MyLinkedList<Integer> integerMyLinkedList;
-    private MyLinkedList<String> stringMyLinkedList;
-
-    @BeforeAll
-    static void beforeAll() {
-        System.out.println("Before all...\n");
-    }
-
-    @AfterAll
-    static void afterAll() {
-        System.out.println("After all...");
-    }
+    private MyLinkedList list;
+    private String[] str = {"is", "a", "simple", "string", "array"};
 
     @BeforeEach
-    void before() {
-        System.out.println("Before each..." + this);
-        integerMyLinkedList = new MyLinkedList<>();
-        stringMyLinkedList = new MyLinkedList<>();
-    }
-
-    @AfterEach
-    void after() {
-        System.out.println("After each..." + this);
-        System.out.println();
+    void before(MyLinkedList<String> list) {
+        this.list = list;
     }
 
     @Test
     void listEmptyIfNoElementsAdd() {
-        System.out.println("running listEmptyIfNoElementsAdd for " + this);
         assertAll(
-                () -> assertThat(integerMyLinkedList.head()).isNull(),
-                () -> assertThat(integerMyLinkedList.tail()).isNull(),
-                () -> assertThat(integerMyLinkedList.size()).isEqualTo(0)
+                () -> assertThat(list.head()).isNull(),
+                () -> assertThat(list.tail()).isNull(),
+                () -> assertThat(list.size()).isEqualTo(0)
         );
     }
 
     @Test
     void listSizeIfElementAdded() {
-        System.out.println("running listSizeIfElementAdded for " + this);
-        for (int i = 1; i <= 10; i++) {
-            integerMyLinkedList.add(i);
-        }
-        assertThat(integerMyLinkedList.size()).isEqualTo(10);
+        list.add(str);
+        assertThat(list.size()).isEqualTo(str.length);
     }
 
     //todo составить список тестов и реализовать
-    //todo рефакторинг неймов переменных
 }
