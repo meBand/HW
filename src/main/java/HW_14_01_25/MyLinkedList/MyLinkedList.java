@@ -1,5 +1,7 @@
 package HW_14_01_25.MyLinkedList;
 
+import java.lang.reflect.Array;
+
 /**
  * MyLinkedList is a simple implementation of linked list.
  * It allows for adding, removing, and accessing elements.
@@ -206,6 +208,20 @@ public class MyLinkedList<T> {
     }
 
     /**
+     * returns data array of a {@link Node} in a {@link MyLinkedList} by index
+     *
+     * @return array of {@link Node#data}
+     */
+
+    public T[] getAll(Class<T> type) {
+        T[] result = (T[]) Array.newInstance(type, size);
+        for (int i = 0; i < size; i++) {
+            result[i] = get(i);
+        }
+        return result;
+    }
+
+    /**
      * returns the data of a {@link Node} in a {@link MyLinkedList}
      *
      * @param node {@link Node}
@@ -280,11 +296,19 @@ public class MyLinkedList<T> {
     public T remove(int index) {
         Node<T> rmNode = getNode(index);
         if (rmNode == head) {
-            head = rmNode.next;
-            head.prev = null;
+            if ( size() > 1 ) {
+                head = rmNode.next;
+                head.prev = null;
+            } else {
+                head = null;
+            }
         } else if (rmNode == tail) {
-            tail = rmNode.prev;
-            tail.next = null;
+            if ( size() > 1 ) {
+                tail = rmNode.prev;
+                tail.next = null;
+            } else {
+                tail = null;
+            }
         } else {
             rmNode.next.prev = rmNode.prev;
             rmNode.prev.next = rmNode.next;
@@ -297,7 +321,8 @@ public class MyLinkedList<T> {
      * removes all {@link Node} from a {@link MyLinkedList}
      */
     public void removeAll() {
-        for (int i = 0; i < size(); i++) {
+        int size = size();
+        for (int i = 0; i < size; i++) {
             remove(0);
         }
     }
