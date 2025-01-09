@@ -294,6 +294,15 @@ public class MyLinkedList<T> {
     }
 
     /**
+     * removes all {@link Node} from a {@link MyLinkedList}
+     */
+    public void removeAll() {
+        for (int i = 0; i < size(); i++) {
+            remove(0);
+        }
+    }
+
+    /**
      * returns sublist based on an existing one within a given range
      *
      * @param startIndex start index of range (inclusive)
