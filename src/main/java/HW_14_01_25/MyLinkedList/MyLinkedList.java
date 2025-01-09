@@ -1,8 +1,5 @@
 package HW_14_01_25.MyLinkedList;
 
-import java.lang.reflect.Array;
-import java.util.Optional;
-
 /**
  * MyLinkedList is a simple implementation of linked list.
  * It allows for adding, removing, and accessing elements.
@@ -141,10 +138,8 @@ public class MyLinkedList<T> {
      * @throws IndexOutOfBoundsException when index out of range
      */
     public void add(int index, T[] data) {
-        int j = 0;
-        for (int i = index; i < index+data.length; i++ ) {
-            add(i, data[j]);
-            j++;
+        for (int i = 0; i < data.length; i++ ) {
+            add(index+i, data[i]);
         }
     }
 
@@ -195,7 +190,10 @@ public class MyLinkedList<T> {
         newNode.next = indexNode;
         newNode.prev = indexNode.prev;
         indexNode.prev.next = newNode;
-        indexNode.next.prev = newNode;
+        if (index != size - 1) {
+            indexNode.prev = newNode;
+        }
+        size++;
     }
 
     /**
