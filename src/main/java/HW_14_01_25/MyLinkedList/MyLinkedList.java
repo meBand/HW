@@ -1,6 +1,7 @@
 package HW_14_01_25.MyLinkedList;
 
 import java.lang.reflect.Array;
+import java.util.Optional;
 
 /**
  * MyLinkedList is a simple implementation of linked list.
@@ -205,20 +206,6 @@ public class MyLinkedList<T> {
      */
     public T get(int index) {
         return getNode(index).data;
-    }
-
-    /**
-     * returns data array of a {@link Node} in a {@link MyLinkedList} by index
-     *
-     * @return array of {@link Node#data}
-     */
-
-    public T[] getAll(Class<T> type) {
-        T[] result = (T[]) Array.newInstance(type, size);
-        for (int i = 0; i < size; i++) {
-            result[i] = get(i);
-        }
-        return result;
     }
 
     /**
