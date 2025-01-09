@@ -131,6 +131,21 @@ public class MyLinkedList<T> {
     }
 
     /**
+     * adds array of new {@link Node} to the {@link MyLinkedList} by index
+     *
+     * @param index index of a {@link Node} in a {@link MyLinkedList}
+     * @param data  {@link Node#data}
+     * @throws IndexOutOfBoundsException when index out of range
+     */
+    public void add(int index, T[] data) {
+        int j = 0;
+        for (int i = index; i < index+data.length; i++ ) {
+            add(i, data[j]);
+            j++;
+        }
+    }
+
+    /**
      * adds new {@link Node} to the end of a {@link MyLinkedList}
      *
      * @param data {@link Node#data}
