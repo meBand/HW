@@ -3,15 +3,21 @@ package HW_14_01_25.MyArrayList;
 /**
  * MyArrayList is a simple implementation of a dynamic array.
  * It allows for adding, removing, and accessing elements.
+ * <p>
+ * Methods size, add, get, set, remove, subList
+ * <p>
+ * P.S. Не реализовывал интерфейсы (избегал копипаста)
+ * <p>
+ * некоторые методы перегружены в целях более удобного использования
  *
  * @Author meBanda
  */
-public class MyArrayList<T> {
+public class MyArrayList<E> {
 
     /**
      * array to store the elements of a {@link MyArrayList}
      */
-    private T[] elements;
+    private E[] elements;
 
     /**
      * current size of the {@link MyArrayList}
@@ -24,13 +30,13 @@ public class MyArrayList<T> {
     private final int DEFAULT_CAPACITY = 10;
 
     /**
-     * create new array T[]
+     * create new array E[]
      *
      * @param capacity initial capacity (should be more than 0)
-     * @return new array T[]
+     * @return new array E[]
      */
-    private T[] createArray(int capacity) {
-        return (T[]) new Object[capacity];
+    private E[] createArray(int capacity) {
+        return (E[]) new Object[capacity];
     }
 
     /**
@@ -73,7 +79,7 @@ public class MyArrayList<T> {
      *
      * @param element the element to add
      */
-    public void add(T element) {
+    public void add(E element) {
         addLast(element);
     }
 
@@ -84,7 +90,7 @@ public class MyArrayList<T> {
      * @param element the element to add
      * @throws IndexOutOfBoundsException when index out if bounds
      */
-    public void add(int index, T element) {
+    public void add(int index, E element) {
         checkIndexOutOfBoundsException(index);
         addByIndex(index, element);
     }
@@ -94,10 +100,10 @@ public class MyArrayList<T> {
      *
      * @param element the element to add
      */
-    private void addLast(T element) {
+    private void addLast(E element) {
         if (size >= elements.length) {
             int newCapacity = (int) (elements.length * 1.5);
-            T[] newArray = createArray(newCapacity);
+            E[] newArray = createArray(newCapacity);
             System.arraycopy(elements, 0, newArray, 0, elements.length);
             elements = newArray;
         }
@@ -109,22 +115,21 @@ public class MyArrayList<T> {
      *
      * @param element the element to add
      */
-    private void addFirst(T element) {
+    private void addFirst(E element) {
         if (size >= elements.length) {
             int newCapacity = (int) (elements.length * 1.5);
-            T[] newArray = createArray(newCapacity);
+            E[] newArray = createArray(newCapacity);
             newArray[0] = element;
             System.arraycopy(elements, 0, newArray, 1, elements.length);
             elements = newArray;
         } else {
-            T[] newArray = createArray(elements.length + 1);
+            E[] newArray = createArray(elements.length + 1);
             newArray[0] = element;
             System.arraycopy(elements, 0, newArray, 1, elements.length);
             elements = newArray;
         }
         size++;
     }
-    //todo addFirst, addLast - по возможности вынести общий метод
 
     /**
      * adds an element into the {@link MyArrayList} by index.
@@ -132,7 +137,7 @@ public class MyArrayList<T> {
      * @param index   index of an element in a {@link MyArrayList}
      * @param element the element to add
      */
-    private void addByIndex(int index, T element) {
+    private void addByIndex(int index, E element) {
         if (index == size) {
             addLast(element);
         } else if (index == 0) {
@@ -153,8 +158,8 @@ public class MyArrayList<T> {
      * @param index   index of an element in a {@link MyArrayList}
      * @param element the element to add
      */
-    private void addInside(int index, T element, int capacity) {
-        T[] newArray = createArray(capacity);
+    private void addInside(int index, E element, int capacity) {
+        E[] newArray = createArray(capacity);
         System.arraycopy(elements, 0, newArray, 0, index);
         newArray[index] = element;
         System.arraycopy(elements, index,
@@ -170,9 +175,9 @@ public class MyArrayList<T> {
      * @return the element at the specified position
      * @throws IndexOutOfBoundsException if the index is out of range
      */
-    public T get(int index) {
+    public E get(int index) {
         checkIndexOutOfBoundsException(index);
-        return (T) elements[index];
+        return (E) elements[index];
     }
 
     /**
@@ -182,7 +187,7 @@ public class MyArrayList<T> {
      * @param element the element to be stored at the specified position
      * @throws IndexOutOfBoundsException if the index is out of range
      */
-    public void set(int index, T element) {
+    public void set(int index, E element) {
         checkIndexOutOfBoundsException(index);
         elements[index] = element;
     }
@@ -194,9 +199,9 @@ public class MyArrayList<T> {
      * @return the element that was removed
      * @throws IndexOutOfBoundsException if the index is out of range
      */
-    public T remove(int index) {
+    public E remove(int index) {
         checkIndexOutOfBoundsException(index);
-        T removedElement = (T) elements[index];
+        E removedElement = (E) elements[index];
         for (int i = index; i < size - 1; i++) {
             elements[i] = elements[i + 1];
         }
@@ -225,16 +230,14 @@ public class MyArrayList<T> {
      * @return a new MyArrayList containing the elements in the specified range
      * @throws IndexOutOfBoundsException if the indices are out of range
      */
-    public MyArrayList<T> subList(int fromIndex, int toIndex) {
+    public MyArrayList<E> subList(int fromIndex, int toIndex) {
         if (fromIndex < 0 || toIndex > size || fromIndex > toIndex) {
             throw new IndexOutOfBoundsException("fromIndex: " + fromIndex + ", toIndex: " + toIndex + ", Size: " + size);
         }
-        MyArrayList<T> subList = new MyArrayList<>();
+        MyArrayList<E> subList = new MyArrayList<>();
         for (int i = fromIndex; i < toIndex; i++) {
-            subList.add((T) elements[i]);
+            subList.add((E) elements[i]);
         }
         return subList;
     }
-
-    //todo по возможности докинуть addAll, getAll, removeAll
 }

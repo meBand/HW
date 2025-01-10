@@ -1,7 +1,5 @@
 package HW_14_01_25.MyLinkedList;
 
-import java.util.Iterator;
-
 /**
  * MyLinkedList is a simple implementation of linked list.
  * It allows for adding, removing, and accessing elements.
