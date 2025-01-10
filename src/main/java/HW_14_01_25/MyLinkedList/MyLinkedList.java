@@ -1,38 +1,44 @@
 package HW_14_01_25.MyLinkedList;
 
+import java.util.Iterator;
+
 /**
  * MyLinkedList is a simple implementation of linked list.
  * It allows for adding, removing, and accessing elements.
+ * <p>
+ * Methods head, tail, size, add, get, getNext, getPrev, set, getNode, remove, removeAll, subList
+ * <p>
+ * P.S. Не реализовывал интерфейсы (избегал копипаста)
  *
  * @Author meBanda
  */
-public class MyLinkedList<T> {
+public class MyLinkedList<E> {
 
     /**
      * first element of a {@link MyLinkedList}
      */
-    private Node<T> head;
+    private Node<E> head;
 
     /**
      * returns first element of a {@link MyLinkedList}
      *
      * @return {@link Node}
      */
-    public Node<T> head() {
+    public Node<E> head() {
         return head;
     }
 
     /**
      * last element of a {@link MyLinkedList}
      */
-    private Node<T> tail;
+    private Node<E> tail;
 
     /**
      * returns last element of a {@link MyLinkedList}
      *
      * @return {@link Node}
      */
-    public Node<T> tail() {
+    public Node<E> tail() {
         return tail;
     }
 
@@ -95,7 +101,7 @@ public class MyLinkedList<T> {
      *
      * @param data {@link Node#data}
      */
-    public void add(T data) {
+    public void add(E data) {
         addLast(data);
     }
 
@@ -104,8 +110,8 @@ public class MyLinkedList<T> {
      *
      * @param data array of {@link Node#data}
      */
-    public void add(T[] data) {
-        for (T e : data) {
+    public void add(E[] data) {
+        for (E e : data) {
             addLast(e);
         }
     }
@@ -117,7 +123,7 @@ public class MyLinkedList<T> {
      * @param data  {@link Node#data}
      * @throws IndexOutOfBoundsException when index out of range
      */
-    public void add(int index, T data) {
+    public void add(int index, E data) {
         if (index == size) {
             addLast(data);
         } else if (index == 0) {
@@ -137,7 +143,7 @@ public class MyLinkedList<T> {
      * @param data  {@link Node#data}
      * @throws IndexOutOfBoundsException when index out of range
      */
-    public void add(int index, T[] data) {
+    public void add(int index, E[] data) {
         for (int i = 0; i < data.length; i++ ) {
             add(index+i, data[i]);
         }
@@ -148,8 +154,8 @@ public class MyLinkedList<T> {
      *
      * @param data {@link Node#data}
      */
-    private void addLast(T data) {
-        Node<T> newNode = new Node<>(data);
+    private void addLast(E data) {
+        Node<E> newNode = new Node<>(data);
         if (head == null) {
             head = newNode;
         } else {
@@ -165,8 +171,8 @@ public class MyLinkedList<T> {
      *
      * @param data {@link Node#data}
      */
-    private void addFirst(T data) {
-        Node<T> newNode = new Node<>(data);
+    private void addFirst(E data) {
+        Node<E> newNode = new Node<>(data);
         if (head == null) {
             head = newNode;
             tail = newNode;
@@ -184,9 +190,9 @@ public class MyLinkedList<T> {
      * @param index index of a {@link Node} in a {@link MyLinkedList}
      * @param data  {@link Node#data}
      */
-    private void addInside(int index, T data) {
-        Node<T> newNode = new Node<>(data);
-        Node<T> indexNode = getNode(index);
+    private void addInside(int index, E data) {
+        Node<E> newNode = new Node<>(data);
+        Node<E> indexNode = getNode(index);
         newNode.next = indexNode;
         newNode.prev = indexNode.prev;
         indexNode.prev.next = newNode;
@@ -202,7 +208,7 @@ public class MyLinkedList<T> {
      * @param index index of a {@link Node} in a {@link MyLinkedList}
      * @return {@link Node#data}
      */
-    public T get(int index) {
+    public E get(int index) {
         return getNode(index).data;
     }
 
@@ -212,7 +218,7 @@ public class MyLinkedList<T> {
      * @param node {@link Node}
      * @return {@link Node#data}
      */
-    public T get(Node<T> node) {
+    public E get(Node<E> node) {
         return node.data;
     }
 
@@ -222,7 +228,7 @@ public class MyLinkedList<T> {
      * @param node {@link Node}
      * @return {@link Node#data}
      */
-    public T getNext(Node<T> node) {
+    public E getNext(Node<E> node) {
         return node.next.data;
     }
 
@@ -232,7 +238,7 @@ public class MyLinkedList<T> {
      * @param node {@link Node}
      * @return {@link Node#data}
      */
-    public T getPrev(Node<T> node) {
+    public E getPrev(Node<E> node) {
         return node.prev.data;
     }
 
@@ -245,9 +251,9 @@ public class MyLinkedList<T> {
      * @param data  {@link Node#data}
      * @return {@link Node#data} before setting new data
      */
-    public T set(int index, T data) {
-        Node<T> current = getNode(index);
-        T oldData = current.data;
+    public E set(int index, E data) {
+        Node<E> current = getNode(index);
+        E oldData = current.data;
         current.data = data;
         return oldData;
     }
@@ -259,11 +265,11 @@ public class MyLinkedList<T> {
      * @return {@link Node}
      * @throws IndexOutOfBoundsException when index out of range
      */
-    public Node<T> getNode(int index) {
+    public Node<E> getNode(int index) {
         if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException("Index out of range: " + index);
         }
-        Node<T> current = head;
+        Node<E> current = head;
         for (int i = 0; i < index; i++) {
             current = current.next;
         }
@@ -276,10 +282,9 @@ public class MyLinkedList<T> {
      * return data of a removed node
      *
      * @param index index of a {@link Node} in a {@link MyLinkedList}
-     * @return {@link Node#data} of a removed {@link Node}
      */
-    public T remove(int index) {
-        Node<T> rmNode = getNode(index);
+    public void remove(int index) {
+        Node<E> rmNode = getNode(index);
         if (rmNode == head) {
             if ( size() > 1 ) {
                 head = rmNode.next;
@@ -299,7 +304,6 @@ public class MyLinkedList<T> {
             rmNode.prev.next = rmNode.next;
         }
         size--;
-        return rmNode.data;
     }
 
     /**
@@ -320,12 +324,12 @@ public class MyLinkedList<T> {
      * @return {@link MyLinkedList}
      * @throws IndexOutOfBoundsException when range is not valid
      */
-    public MyLinkedList<T> subList(int startIndex, int endIndex) {
+    public MyLinkedList<E> subList(int startIndex, int endIndex) {
         if (!checkRange(startIndex, endIndex)) {
             throw new IndexOutOfBoundsException("Range is not valid: ( startIndex = " + startIndex +
                     " endIndex = " + endIndex);
         }
-        MyLinkedList<T> subList = new MyLinkedList<>();
+        MyLinkedList<E> subList = new MyLinkedList<>();
         for (int i = startIndex; i < endIndex; i++) {
             subList.add(this.get(i));
         }
@@ -342,6 +346,4 @@ public class MyLinkedList<T> {
     private boolean checkRange(int startIndex, int endIndex) {
         return startIndex >= 0 && startIndex < size && endIndex >= startIndex;
     }
-
-    //todo javaDoc, по возможности докинуть addAll, getAll, removeAll
 }
