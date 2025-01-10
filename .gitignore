@@ -1,8 +1,6 @@
 .idea
 .gradle
 HW.iml
-testArrayList.java
-testLinkedList.java
 out
 build.gradle
 gradlew
