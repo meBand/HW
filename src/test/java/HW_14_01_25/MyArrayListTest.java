@@ -22,12 +22,6 @@ public class MyArrayListTest {
 
     private static final String[] strs = {"is", "a", "simple", "string", "array"};
 
-    /**
-     * set(index, e)
-     * remove(index)
-     * subList(fromIndex, toIndex)
-     */
-
     @Nested
     class SizeTest {
 
@@ -94,7 +88,7 @@ public class MyArrayListTest {
         }
 
         @Test
-        void addElementIfIndexOfBound(MyArrayList<String> list) {
+        void addElementIfIndexOutOfBound(MyArrayList<String> list) {
             assertThrows(IndexOutOfBoundsException.class, () -> list.add(1, strs[0]));
         }
     }
@@ -108,7 +102,7 @@ public class MyArrayListTest {
         }
 
         @Test
-        void getElementIfIndexOfBound(MyArrayList<String> list) {
+        void getElementIfIndexOutOfBound(MyArrayList<String> list) {
             list.add(strs);
             assertThrows(IndexOutOfBoundsException.class, () -> list.get(list.size()));
         }
@@ -131,7 +125,7 @@ public class MyArrayListTest {
         }
 
         @Test
-        void SetIfIndexOfBound(MyArrayList<String> list) {
+        void SetIfIndexOutOfBound(MyArrayList<String> list) {
             list.add(strs);
             assertThrows(IndexOutOfBoundsException.class, () -> list.set(list.size(), "check"));
         }
@@ -149,10 +143,49 @@ public class MyArrayListTest {
     @Nested
     class RemoveTest {
 
+        @Test
+        void removeIfListEmpty(MyArrayList<?> list) {
+            assertThrows(IndexOutOfBoundsException.class, () -> list.remove(0));
+        }
+
+        @Test
+        void removeIfIndexOutOfBound(MyArrayList<String> list) {
+            list.add(strs);
+            assertThrows(IndexOutOfBoundsException.class, () -> list.remove(list.size()));
+        }
+
+        @Test
+        void removeIfListFilled(MyArrayList<String> list) {
+            list.add(strs);
+            list.remove(list.size()-1);
+            for (int i = 0; i < list.size(); i++) {
+                assertThat(list.get(i)).isEqualTo(strs[i]);
+            }
+        }
     }
 
     @Nested
     class SubListTest {
 
+        @Test
+        void subListIfListEmpty(MyArrayList<?> list) {
+            assertThrows(IndexOutOfBoundsException.class, () -> list.subList(0, 1));
+        }
+
+        @Test
+        void subListIfIndexOutOfBound(MyArrayList<String> list) {
+            list.add(strs);
+            assertThrows(IndexOutOfBoundsException.class, () -> list.subList(0, list.size() + 1));
+        }
+
+        @Test
+        void subListTest(MyArrayList<String> list) {
+            list.add(strs);
+            list.add(strs);
+            MyArrayList<String> subList = list.subList(0, strs.length);
+            for (int i = 0; i < subList.size(); i++) {
+                assertThat(list.get(i)).isEqualTo(strs[i]);
+            }
+        }
     }
 }
