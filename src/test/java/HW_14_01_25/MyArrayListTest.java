@@ -1,8 +1,8 @@
 package HW_14_01_25;
 
-import HW_14_01_25.MyLinkedList.MyLinkedList;
+import HW_14_01_25.MyArrayList.MyArrayList;
 
-import HW_14_01_25.paramResolver.ListParamResolver;
+import HW_14_01_25.paramResolver.MyArrayListParamResolver;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 
@@ -15,9 +15,8 @@ import static org.assertj.core.api.Assertions.assertThat;
  * использовал DI предоставляемое jUnit 5, а также AssertJ
  */
 
-
 @ExtendWith({
-        ListParamResolver.class
+        MyArrayListParamResolver.class
 })
 public class MyArrayListTest {
 
