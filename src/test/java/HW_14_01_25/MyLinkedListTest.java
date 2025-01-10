@@ -6,26 +6,27 @@ import HW_14_01_25.paramResolver.ListParamResolver;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 
+import java.util.Arrays;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
+
+/**
+ * Класс для тестирования MyLinkedList
+ * <p>
+ * использовал DI предоставляемое jUnit 5, use AssertJ
+ */
+
 
 @ExtendWith({
         ListParamResolver.class
 })
-class MyLinkedListTest<T> {
+class MyLinkedListTest {
 
     /**
-     * add(T)
-     * add(T[])
-     * add(index, T)
-     * add(index, T[])
-     * get(index)
-     * get(node)
-     * getAll()
      * getNext(node)
      * getPrev(node)
      * set(index, T)
-     * getNode(index)
      * remove(index)
      * removeAll()
      * sublist(indexStart, indexEnd)
@@ -39,7 +40,7 @@ class MyLinkedListTest<T> {
     class HeadTest {
 
         @Test
-        void headIfNoElementAdd(MyLinkedList<T> list) {
+        void headIfNoElementAdd(MyLinkedList<?> list) {
             assertThat(list.head()).isNull();
         }
 
@@ -68,7 +69,7 @@ class MyLinkedListTest<T> {
     class TailTest {
 
         @Test
-        void headIfNoElementAdd(MyLinkedList<T> list) {
+        void headIfNoElementAdd(MyLinkedList<?> list) {
             assertThat(list.tail()).isNull();
         }
 
@@ -97,7 +98,7 @@ class MyLinkedListTest<T> {
     class SizeTest {
 
         @Test
-        void sizeIfNoElementsAdd(MyLinkedList<T> list) {
+        void sizeIfNoElementsAdd(MyLinkedList<?> list) {
             assertThat(list.size()).isEqualTo(0);
         }
 
@@ -141,11 +142,9 @@ class MyLinkedListTest<T> {
         void addElementByIndex(MyLinkedList<String> list) {
             list.add(strs);
             for (int i = 0; i < strs.length-1; i++) {
-                int finalI = i;
-
-                list.add(finalI, strs[finalI]);
-                assertThat( list.get(finalI) ).isEqualTo(strs[finalI]);
-                list.remove(finalI);
+                list.add(i, strs[i]);
+                assertThat( list.get(i) ).isEqualTo(strs[i]);
+                list.remove(i);
             }
         }
 
@@ -161,18 +160,75 @@ class MyLinkedListTest<T> {
         void addArrayOfElementByIndex(MyLinkedList<String> list) {
             list.add(strs);
             list.add(0, strs);
-            //todo доделать
+            assertThat(list.size()).isEqualTo(strs.length*2);
+            for (int i = 0; i < list.size(); i++) {
+                assertThat(strs).contains(list.get(i));
+            }
         }
     }
 
     @Nested
     class GetTest {
 
+        @Test
+        void getElementByIndexIfListEmpty(MyLinkedList<?> list) {
+            assertThrows(IndexOutOfBoundsException.class, () -> list.get(0));
+        }
+
+        @Test
+        void getElementByIndex(MyLinkedList<String> list) {
+            list.add(strs);
+            for (int i = 0; i < list.size(); i++) {
+                assertThat(list.get(i)).isEqualTo(strs[i]);
+            }
+        }
+
+        @Test
+        void getElementByNode(MyLinkedList<String> list) {
+            list.add(strs);
+            for (int i = 0; i < list.size(); i++) {
+                assertThat( list.get(list.getNode(i)) ).isEqualTo(strs[i]);
+            }
+        }
+
+        @Test
+        void getNodeByIndex(MyLinkedList<String> list) {
+            list.add(strs);
+            for (int i = 0; i < list.size(); i++) {
+                assertThat( list.get(list.getNode(i)) ).isEqualTo(strs[i]);
+            }
+        }
+
+        @Test
+        void getNextElementByNode(MyLinkedList<String> list) {
+            list.add(strs);
+            for (int i = 0; i < list.size(); i++) {
+                if (i == list.size() - 1) {
+                    int finalI = i;
+                    assertThrows( NullPointerException.class, () -> list.getNext(list.getNode(finalI)) );
+                } else {
+                    assertThat( list.getNext(list.getNode(i)) ).isEqualTo( list.get(i+1) );
+                }
+            }
+        }
+
+        @Test
+        void getPrevElementByNode(MyLinkedList<String> list) {
+            list.add(strs);
+            for (int i = 0; i < list.size(); i++) {
+                if (i == 0) {
+                    int finalI = i;
+                    assertThrows( NullPointerException.class, () -> list.getPrev(list.getNode(finalI)) );
+                } else {
+                    assertThat( list.getPrev(list.getNode(i)) ).isEqualTo( list.get(i-1) );
+                }
+            }
+        }
     }
 
     @Nested
     class SetTest {
-
+        
     }
 
     @Nested
