@@ -6,15 +6,13 @@ import HW_14_01_25.paramResolver.ListParamResolver;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-import java.util.Arrays;
-
 import static org.junit.jupiter.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Класс для тестирования MyLinkedList
  * <p>
- * использовал DI предоставляемое jUnit 5, use AssertJ
+ * использовал DI предоставляемое jUnit 5, а также AssertJ
  */
 
 
@@ -23,17 +21,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 })
 class MyLinkedListTest {
 
-    /**
-     * getNext(node)
-     * getPrev(node)
-     * set(index, T)
-     * remove(index)
-     * removeAll()
-     * sublist(indexStart, indexEnd)
-     */
-
-    private static final Integer[] ints = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-    private static final Double[] doubles = {1.1, 2.2, 3.3, 4.4, 5.5};
     private static final String[] strs = {"is", "a", "simple", "string", "array"};
 
     @Nested
@@ -228,18 +215,68 @@ class MyLinkedListTest {
 
     @Nested
     class SetTest {
-        
+
+        @Test
+        void setIfListEmpty(MyLinkedList<String> list) {
+            assertThrows(IndexOutOfBoundsException.class, () -> list.set(0, strs[0]));
+        }
+
+        @Test
+        void setAnyElement(MyLinkedList<String> list) {
+            list.add(strs);
+            int index = 3;
+            String check = "check";
+            assertAll(
+                    () -> assertThat(list.set(index, check)).isEqualTo(strs[index]),
+                    () -> assertThat(list.get(index)).isEqualTo(check)
+            );
+        }
     }
 
     @Nested
     class RemoveTest {
 
+        @Test
+        void removeIfListEmpty(MyLinkedList<String> list) {
+            assertThrows(IndexOutOfBoundsException.class, () -> list.remove(0));
+        }
+
+        @Test
+        void removeElementByIndex(MyLinkedList<String> list) {
+            list.add(strs);
+            list.remove(0);
+            assertAll(
+                    () -> assertThat(list.size()).isEqualTo(strs.length-1),
+                    () -> assertThat(list.get(list.head())).isEqualTo(strs[1])
+            );
+        }
+
+        @Test
+        void removeElementByNode(MyLinkedList<String> list) {
+            list.add(strs);
+            list.remove(list.head());
+            assertAll(
+                    () -> assertThat(list.size()).isEqualTo(strs.length-1),
+                    () -> assertThat(list.get(list.head())).isEqualTo(strs[1])
+            );
+        }
     }
 
     @Nested
     class SubListTest {
 
-    }
+        @Test
+        void subListIfListEmpty(MyLinkedList<String> list) {
+            assertThrows(IndexOutOfBoundsException.class, () -> list.subList(0, 4));
+        }
 
-    //todo составить список тестов и реализовать
+        @Test
+        void subListTest(MyLinkedList<String> list) {
+            list.add(strs);
+            MyLinkedList<String> subList = list.subList(0, 3);
+            for( int i = 0; i < subList.size(); i++) {
+                assertThat(subList.get(i)).isEqualTo(list.get(i));
+            }
+        }
+    }
 }

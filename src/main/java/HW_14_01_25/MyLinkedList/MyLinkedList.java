@@ -9,6 +9,8 @@ import java.util.Iterator;
  * Methods head, tail, size, add, get, getNext, getPrev, set, getNode, remove, removeAll, subList
  * <p>
  * P.S. Не реализовывал интерфейсы (избегал копипаста)
+ * <p>
+ * некоторые методы перегружены в целях более удобного использования
  *
  * @Author meBanda
  */
@@ -278,30 +280,37 @@ public class MyLinkedList<E> {
 
     /**
      * removes a {@link Node} from a {@link MyLinkedList} by index
-     * <p>
-     * return data of a removed node
      *
      * @param index index of a {@link Node} in a {@link MyLinkedList}
      */
     public void remove(int index) {
         Node<E> rmNode = getNode(index);
-        if (rmNode == head) {
+        remove(rmNode);
+    }
+
+    /**
+     * removes a {@link Node} from a {@link MyLinkedList}
+     *
+     * @param node is {@link Node} in a {@link MyLinkedList}
+     */
+    public void remove(Node<E> node) {
+        if (node == head) {
             if ( size() > 1 ) {
-                head = rmNode.next;
+                head = node.next;
                 head.prev = null;
             } else {
                 head = null;
             }
-        } else if (rmNode == tail) {
+        } else if (node == tail) {
             if ( size() > 1 ) {
-                tail = rmNode.prev;
+                tail = node.prev;
                 tail.next = null;
             } else {
                 tail = null;
             }
         } else {
-            rmNode.next.prev = rmNode.prev;
-            rmNode.prev.next = rmNode.next;
+            node.next.prev = node.prev;
+            node.prev.next = node.next;
         }
         size--;
     }
