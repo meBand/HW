@@ -84,6 +84,17 @@ public class MyArrayList<E> {
     }
 
     /**
+     * adds array of elements to the end of a {@link MyArrayList}.
+     *
+     * @param elements the array of elements to add
+     */
+    public void add(E[] elements) {
+        for (E e : elements) {
+            add(e);
+        }
+    }
+
+    /**
      * adds an element into the {@link MyArrayList} by index.
      *
      * @param index   index of an element in a {@link MyArrayList}
@@ -93,6 +104,20 @@ public class MyArrayList<E> {
     public void add(int index, E element) {
         checkIndexOutOfBoundsException(index);
         addByIndex(index, element);
+    }
+
+    /**
+     * adds array of elements into the {@link MyArrayList} by index.
+     *
+     * @param index   index of an element in a {@link MyArrayList}
+     * @param elements the array of elements to add
+     * @throws IndexOutOfBoundsException when index out if bounds
+     */
+    public void add(int index, E[] elements) {
+        checkIndexOutOfBoundsException(index);
+        for (int i = 0; i < elements.length; i++ ) {
+            add(index+i, elements[i]);
+        }
     }
 
     /**
@@ -177,7 +202,7 @@ public class MyArrayList<E> {
      */
     public E get(int index) {
         checkIndexOutOfBoundsException(index);
-        return (E) elements[index];
+        return elements[index];
     }
 
     /**
@@ -201,7 +226,7 @@ public class MyArrayList<E> {
      */
     public E remove(int index) {
         checkIndexOutOfBoundsException(index);
-        E removedElement = (E) elements[index];
+        E removedElement = elements[index];
         for (int i = index; i < size - 1; i++) {
             elements[i] = elements[i + 1];
         }
@@ -236,7 +261,7 @@ public class MyArrayList<E> {
         }
         MyArrayList<E> subList = new MyArrayList<>();
         for (int i = fromIndex; i < toIndex; i++) {
-            subList.add((E) elements[i]);
+            subList.add(elements[i]);
         }
         return subList;
     }
