@@ -19,6 +19,7 @@ public class GlobalLibrary {
 
     public void addBook(Book book) {
         books.add(book);
+        System.out.println("Книга '" + book.getName() + "' поступила в библиотеку!");
         notifySubscribers(book);
     }
 
