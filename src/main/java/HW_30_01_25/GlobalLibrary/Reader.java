@@ -18,6 +18,6 @@ public class Reader implements Subscriber {
     @Override
     public void update(Book book) {
         books.add(book);
-        System.out.println(name + ": добавил книгу '" + book.getName() + "' в свою коллекцию.");
+        System.out.println(name + ": добавил(а) книгу '" + book.getName() + "' в свою коллекцию.");
     }
 }

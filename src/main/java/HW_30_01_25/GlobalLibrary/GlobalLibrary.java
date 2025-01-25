@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GlobalLibrary {
-    private static GlobalLibrary instance;
+    private static GlobalLibrary instance = null;
     private List<Book> books = new ArrayList<>();
     private List<Subscriber> subscribers = new ArrayList<>();
 
     private GlobalLibrary() {}
 
-    public static GlobalLibrary getInstance() {
+    public static GlobalLibrary create() {
         if (instance == null) {
             instance = new GlobalLibrary();
         }
@@ -44,10 +44,12 @@ public class GlobalLibrary {
 
     public void subscribe(Subscriber subscriber) {
         subscribers.add(subscriber);
+        System.out.println(subscriber.getName() + " оформил(а) подписку.");
     }
 
     public void unsubscribe(Subscriber subscriber) {
         subscribers.remove(subscriber);
+        System.out.println(subscriber.getName() + " закрыл(а) подписку.");
     }
 
     private void notifySubscribers(Book book) {
