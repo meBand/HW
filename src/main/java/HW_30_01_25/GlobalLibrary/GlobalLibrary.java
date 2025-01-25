@@ -19,7 +19,7 @@ public class GlobalLibrary {
 
     public void addBook(Book book) {
         books.add(book);
-        System.out.println("Книга '" + book.getName() + "' поступила в библиотеку!");
+        System.out.println("Книга '" + book.getTitle() + "' поступила в библиотеку!");
         notifySubscribers(book);
     }
 
@@ -34,7 +34,7 @@ public class GlobalLibrary {
 
     public Book getBook(String name) {
         for (Book book : books) {
-            if (book.getName() == name) {
+            if (book.getTitle() == name) {
                 return book;
             }
         }

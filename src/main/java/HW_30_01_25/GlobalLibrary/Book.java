@@ -1,16 +1,22 @@
 package HW_30_01_25.GlobalLibrary;
 
+/**
+ * Usual book
+ */
 public class Book {
-    private String name;
-    private Genre genre;
+    /**
+     * {@link Book} title
+     */
+    private final String title;
+    private final Genre genre;
 
-    public Book(String name, Genre genre) {
-        this.name = name;
+    public Book(String title, Genre genre) {
+        this.title = title;
         this.genre = genre;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
     public Genre getGenre() {

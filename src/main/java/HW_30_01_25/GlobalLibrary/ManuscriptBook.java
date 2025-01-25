@@ -1,16 +1,16 @@
 package HW_30_01_25.GlobalLibrary;
 
 public class ManuscriptBook {
-    private String name;
+    private String title;
     private Genre genre;
 
-    public ManuscriptBook(String name, Genre genre) {
-        this.name = name;
+    public ManuscriptBook(String title, Genre genre) {
+        this.title = title;
         this.genre = genre;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
     public Genre getGenre() {
