@@ -1,5 +1,8 @@
 package HW_30_01_25.GlobalLibrary;
 
+/**
+ * Possible genres
+ */
 public enum Genre {
     FICTION ("Художественная литература"),
     NONFICTION ("Нехудожественная литература"),
@@ -17,12 +20,23 @@ public enum Genre {
     DRAMA ("Драма"),
     COMEDY ("Комедия");
 
+    /**
+     * Genre title
+     */
     private String title;
 
+    /**
+     * Constructor genre
+     * @param title genre title
+     */
     Genre(String title) {
         this.title = title;
     }
 
+    /**
+     * Method returns genre title
+     * @return {@link Genre#title}
+     */
     public String getTitle() {
         return title;
     }
