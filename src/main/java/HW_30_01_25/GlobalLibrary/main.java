@@ -7,10 +7,14 @@ public class main {
         Book book3 = new Book("Паттерны проектирование", Genre.NONFICTION);
         Book book4 = new Book("1984", Genre.SCIENCE);
         Book book5 = new Book("Властелин колец", Genre.FANTASY);
-        Book book6 = new Book("Молчание ягнят", Genre.HORROR);
-        Book book7 = new Book("Зеленый свет", Genre.AUTOBIOGRAPHY);
-        Book book8 = new Book("Евгений Онегин", Genre.POETRY);
-        Book book9 = new Book("Институт", Genre.THRILLER);
+
+        ManuscriptBook manuscriptBook1 = new ManuscriptBook("Зеленый свет", Genre.AUTOBIOGRAPHY);
+        ManuscriptBook manuscriptBook2 = new ManuscriptBook("Евгений Онегин", Genre.POETRY);
+        ManuscriptBook manuscriptBook3 = new ManuscriptBook("Институт", Genre.THRILLER);
+
+        ManuscriptBookAdapter adaptManuscriptBook1 = new ManuscriptBookAdapter(manuscriptBook1);
+        ManuscriptBookAdapter adaptManuscriptBook2 = new ManuscriptBookAdapter(manuscriptBook2);
+        ManuscriptBookAdapter adaptManuscriptBook3 = new ManuscriptBookAdapter(manuscriptBook3);
 
         Reader reader1 = new Reader("Петр");
         Reader reader2 = new Reader("Василий");
@@ -40,9 +44,9 @@ public class main {
         newLibrary.unsubscribe(reader2);
         System.out.println();
 
-        library.addBook(book6);
-        library.addBook(book7);
-        library.addBook(book8);
-        library.addBook(book9);
+        //library.addBook(manuscriptBook1); - не скомпилируется
+        library.addBook(adaptManuscriptBook1);
+        library.addBook(adaptManuscriptBook2);
+        library.addBook(adaptManuscriptBook3);
     }
 }
