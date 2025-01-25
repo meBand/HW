@@ -8,6 +8,7 @@ public class Book {
      * {@link Book} title
      */
     private final String title;
+
     /**
      * {@link Book} genre
      */
