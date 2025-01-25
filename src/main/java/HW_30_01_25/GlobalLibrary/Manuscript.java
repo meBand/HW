@@ -3,23 +3,23 @@ package HW_30_01_25.GlobalLibrary;
 /**
  * Usual manuscript book
  */
-public class ManuscriptBook {
+public class Manuscript {
     /**
-     * {@link ManuscriptBook} title
+     * {@link Manuscript} title
      */
     private String title;
 
     /**
-     * {@link ManuscriptBook} genre
+     * {@link Manuscript} genre
      */
     private Genre genre;
 
     /**
-     * Constructor of {@link ManuscriptBook}
-     * @param title {@link ManuscriptBook} title
-     * @param genre {@link ManuscriptBook} genre
+     * Constructor of {@link Manuscript}
+     * @param title {@link Manuscript} title
+     * @param genre {@link Manuscript} genre
      */
-    public ManuscriptBook(String title, Genre genre) {
+    public Manuscript(String title, Genre genre) {
         this.title = title;
         this.genre = genre;
     }

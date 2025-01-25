@@ -8,13 +8,13 @@ public class main {
         Book book4 = new Book("1984", Genre.SCIENCE);
         Book book5 = new Book("Властелин колец", Genre.FANTASY);
 
-        ManuscriptBook manuscriptBook1 = new ManuscriptBook("Зеленый свет", Genre.AUTOBIOGRAPHY);
-        ManuscriptBook manuscriptBook2 = new ManuscriptBook("Евгений Онегин", Genre.POETRY);
-        ManuscriptBook manuscriptBook3 = new ManuscriptBook("Институт", Genre.THRILLER);
+        Manuscript manuscript1 = new Manuscript("Зеленый свет", Genre.AUTOBIOGRAPHY);
+        Manuscript manuscript2 = new Manuscript("Евгений Онегин", Genre.POETRY);
+        Manuscript manuscript3 = new Manuscript("Институт", Genre.THRILLER);
 
-        ManuscriptBookAdapter adaptManuscriptBook1 = new ManuscriptBookAdapter(manuscriptBook1);
-        ManuscriptBookAdapter adaptManuscriptBook2 = new ManuscriptBookAdapter(manuscriptBook2);
-        ManuscriptBookAdapter adaptManuscriptBook3 = new ManuscriptBookAdapter(manuscriptBook3);
+        ManuscriptBookAdapter adaptManuscriptBook1 = new ManuscriptBookAdapter(manuscript1);
+        ManuscriptBookAdapter adaptManuscriptBook2 = new ManuscriptBookAdapter(manuscript2);
+        ManuscriptBookAdapter adaptManuscriptBook3 = new ManuscriptBookAdapter(manuscript3);
 
         Reader reader1 = new Reader("Петр");
         Reader reader2 = new Reader("Василий");
@@ -44,7 +44,7 @@ public class main {
         newLibrary.unsubscribe(reader2);
         System.out.println();
 
-        //library.addBook(manuscriptBook1); - не скомпилируется
+        //library.addBook(manuscript1); - не скомпилируется
         library.addBook(adaptManuscriptBook1);
         library.addBook(adaptManuscriptBook2);
         library.addBook(adaptManuscriptBook3);
